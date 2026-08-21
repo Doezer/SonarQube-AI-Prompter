@@ -14,22 +14,28 @@ document.getElementById('extractBtn').addEventListener('click', async () => {
   // Inject and execute the extraction function in the active tab
   chrome.scripting.executeScript({
     target: { tabId: tab.id },
-    function: extractSonarIssues
+    func: extractSonarIssues
   }, (results) => {
-    if (results?.[0]?.result) {
-      const promptText = results[0].result;
-      resultArea.value = promptText;
-      
-      // Copy to clipboard
-      navigator.clipboard.writeText(promptText).then(() => {
-        btn.innerText = "Copied to Clipboard! ✓";
-        btn.style.backgroundColor = "#16a34a"; // Green success color
-        setTimeout(() => {
-          btn.innerText = "Generate & Copy Prompt";
-          btn.style.backgroundColor = "#2563eb";
-        }, 3000);
-      });
+    if (chrome.runtime.lastError || !results?.[0]?.result) {
+      resultArea.value = `Error: ${chrome.runtime.lastError?.message ?? "Could not extract issues from the page."}`;
+      btn.innerText = "Generate & Copy Prompt";
+      return;
     }
+
+    const promptText = results[0].result;
+    resultArea.value = promptText;
+
+    // Copy to clipboard
+    navigator.clipboard.writeText(promptText).then(() => {
+      btn.innerText = "Copied to Clipboard! ✓";
+      btn.style.backgroundColor = "#16a34a"; // Green success color
+      setTimeout(() => {
+        btn.innerText = "Generate & Copy Prompt";
+        btn.style.backgroundColor = "#2563eb";
+      }, 3000);
+    }).catch(() => {
+      btn.innerText = "Generate & Copy Prompt";
+    });
   });
 });
 

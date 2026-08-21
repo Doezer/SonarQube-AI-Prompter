@@ -33,6 +33,8 @@ jobs:
           $distDir = Join-Path $env:GITHUB_WORKSPACE 'dist'
           $version = $env:GITHUB_REF_NAME
 
+          New-Item -ItemType Directory -Path $distDir -Force | Out-Null
+
           Compress-Archive -Path manifest.json, popup.html, popup.js, README.md -DestinationPath (Join-Path $distDir "sonar-ai-prompter-$version.zip") -Force
 
       - name: Publish GitHub release assets
