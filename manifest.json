@@ -10,7 +10,5 @@
     "activeTab",
     "scripting"
   ],
-  "host_permissions": [
-    "*://sonarcloud.io/*"
-  ]
+  "host_permissions": []
 }

@@ -27,7 +27,7 @@ assert(manifest.manifest_version === 3, 'manifest.json must use Manifest V3.');
 assert(manifest.action?.default_popup === 'popup.html', 'manifest.json must point to popup.html.');
 assert(Array.isArray(manifest.permissions) && manifest.permissions.includes('activeTab'), 'manifest.json must request activeTab.');
 assert(Array.isArray(manifest.permissions) && manifest.permissions.includes('scripting'), 'manifest.json must request scripting.');
-assert(Array.isArray(manifest.host_permissions) && manifest.host_permissions.includes('*://sonarcloud.io/*'), 'manifest.json must target SonarCloud only.');
+assert(!manifest.host_permissions || manifest.host_permissions.length === 0, 'manifest.json must not require host permissions; activeTab should cover supported pages.');
 
 assert(/<html[^>]*lang="en"/i.test(popupHtml), 'popup.html must declare a document language.');
 assert(/<title>Sonar AI Prompter<\/title>/i.test(popupHtml), 'popup.html must include a title.');

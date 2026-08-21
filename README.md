@@ -43,5 +43,5 @@ node scripts/validate-extension.mjs
 ## Notes
 
 - The extension accepts any host as long as the current page path is `/project/issues`.
-- It requests `activeTab` and `scripting` so it can read the current page and inject the extractor.
+- It requests `activeTab` and `scripting` so it can read the current page and inject the extractor; it does not need explicit host permissions for supported pages.
 - If SonarCloud changes its DOM, update the selectors in `popup.js` and re-run the sanity check. Please do a PR if you do it yourself.
