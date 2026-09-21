@@ -128,6 +128,10 @@ Bug reports and feature requests are welcome — the issue templates under
 [`.github/ISSUE_TEMPLATE`](.github/ISSUE_TEMPLATE) will prompt you for what is
 needed. Selector fixes after a Sonar redesign are especially useful.
 
+## License
+
+[MIT](LICENSE).
+
 ## Credits
 
 Built entirely with AI assistance: scaffolded by Gemini Pro, finished with
